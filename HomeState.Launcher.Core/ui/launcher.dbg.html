@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/loading.css">
+    <script src="js/fontawesome-all.min.js"></script>
+</head>
+<body>
+
+<div class="modal fade bd-example-modal" id="twoFaModal" tabindex="-1" role="dialog" aria-labelledby="twoFaModal"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+            <div style="margin: 20px;">
+                <h1 style="text-align: center">2 Faktor Auth</h1>
+                <div style="margin-top: 20px;">
+                    <form id="twoFaForm">
+                        <input style="text-align: center; font-size: 30px" class="form-control" id="inputTwoFa"
+                               type="number" max="999999" autofocus>
+                        <br>
+                        <button id="twoFaSubmit" style="width: 100%; font-size: 20px" type="submit"
+                                class="btn btn-primary">Anmelden
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="color: black">
+        <div class="modal-content">
+            <div style="margin: 20px;">
+                <h1>Loaded Plugins</h1>
+                <div id="loadedPluginsContainer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="topBar animated fadeIn">
+    <div class="windowText">HomeState Launcher</div>
+    <div class="windowButtons">
+        <div id="debugButtons" style="display: inline; background-color: red; margin-right: 20px;">
+            <div style="color: white; display: inline; margin-right: 5px">DEBUG MODE</div>
+            <a href="javascript://" data-toggle="modal" data-target=".bd-example-modal-lg" class="fas fa-plug"></a>
+            <a href="javascript://" onclick="chrome.toggleDevTools()" class="fas fa-bug"></a>
+        </div>
+        <a href="javascript://" onclick="showSettings()" class="fas fa-cog"></a>
+        <a href="javascript://" style="margin-left: 10px" onclick="launcher.minimize()" class="far fa-window-minimize"></a>
+        <a href="javascript://" style="margin-left: 10px" onclick="launcher.exit()" class="fas fa-times"></a>
+    </div>
+</div>
+
+    <div id="settingsPopupBg" class="settingsPopupBg">
+        <div class="settingsPopup animated fadeInDown" id="settingsPopup">
+        
+        <div class="settingsPopupContainer">
+            <h4>Einstellungen</h4>
+            <form>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                  <label class="form-check-label" for="exampleRadios1">
+                    Default radio
+                  </label>
+                </div>
+            </form>
+        </div>
+        
+    </div>
+    </div>
+    
+    
+<div id="loginWindow">
+    <div class="statusMessageContainer">
+    </div>
+    <div class="hsLogo animated fadeInDown"></div>
+    <div id="mainContainer" class="mainContainer animated zoomIn">
+        <div class="loginContainer">
+            <form id="loginForm" class="form-signin">
+                <div id="loginErrorMessage" class="loginErrorMessage">
+                    Fehler: Falsche Zugangsdaten.
+                </div>
+                <div class="form-label-group">
+                    <label for="inputUsername">Benutzername</label>
+                    <input type="text" id="inputUsername" autofocus class="form-control" placeholder="Benutzername"
+                           spellcheck="false" required>
+                </div>
+                <div class="form-label-group pwspace">
+                    <label for="inputPassword">Passwort</label>
+                    <input type="password" id="inputPassword" class="form-control" placeholder="Passwort" required>
+                </div>
+
+                <div class="custom-control custom-checkbox mb-3 cbspace">
+                    <input type="checkbox" class="custom-control-input" id="saveCredsCheck">
+                    <label class="custom-control-label" for="saveCredsCheck">Zugangsdaten speichern</label>
+                </div>
+                
+                <button class="btn btn-lg btn-primary btn-block text-uppercase" id="loginBtn" type="submit">Anmelden
+                </button>
+                <a href="javascript://" onclick="launcher.resetPw();">Passwort vergessen</a>
+            </form>
+        </div>
+        <div id="loadingContainer" class="loadingContainer">
+            <div class="lds-ellipsis">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="mainWindow">
+    <div id="newsContainer" class="animated zoomIn">
+        <div class="statusMessageContainer">
+        </div>
+        <h1>News</h1>
+        <div class="newsScrollContainer">
+            <div class="newsSpacer"></div>
+            <div class="newsBackground">
+                <div class="news">
+                    <h4 style="display: inline;">Launcher Test</h4>
+                    <p style="display: inline; margin-left: 10px;">von ClutchFred</p>
+                    <p style="margin: 5px;">Vielen Dank für dein Interesse am neuen Launcher.</p>
+                    <p style="margin: 5px;">Bitte melde alle Fehler die du finden kannst unter diesem <a target="_blank"
+                                                                                                         href="https://discordapp.com/channels/493160573643522068/593484482070183937/593486677448589323">Discord</a>
+                        Channel.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="actionContainer" class="actionContainer">
+        <div class="avatar" id="avatar"></div>
+        <div id="prgCont">
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" id="prg" role="progressbar"
+                     style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Überprüfe
+                    Spieldaten...
+                </div>
+            </div>
+        </div>
+        <div id="playBtnDiv">
+            <button type="text" id="playButton" class="form-control playButton">Spielen</button>
+        </div>
+    </div>
+</div>
+
+<script src="js/jquery-3.3.1.slim.min.js"></script>
+<script src="js/jquery.animateCSS.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script>
+
+    $("#mainWindow").hide();
+    $("#playBtnDiv").hide();
+    $("#loadingContainer").hide();
+    $("#loginErrorMessage").hide();
+    $("#settingsPopupBg").hide();
+
+    function showSettings() {
+        $("#settingsPopupBg").show();
+    }
+       
+    $("#settingsPopupBg").click(() => {
+        $("#settingsPopupBg").animateCSS("fadeOut", 400, () => {
+            $("#settingsPopupBg").hide();
+        });
+    });
+       
+   
+    
+    var jsonResponse = JSON.parse(launcher.getNews());
+
+
+    if(jsonResponse.statusMessage.show) {
+        $(".statusMessageContainer").append(
+            " <div class=\"info\" style=\"margin: 10px;\">\n" +
+            "            <div class=\"alert alert-" + jsonResponse.statusMessage.type +"\" role=\"alert\">\n" +
+            jsonResponse.statusMessage.content +
+            "            </div>\n" +
+            "        </div>"
+        );
+    }
+    
+    
+      
+    if(!launcher.isDebug()) {
+        $("#debugButtons").hide();
+    }
+
+    $("#playButton").click((s) => {
+        launcher.startGame();
+    });
+    
+    function showPlayButton() {
+        $("#playBtnDiv").show();
+        $("#prgCont").hide();
+    }
+
+    function hidePlayButton() {
+        $("#playBtnDiv").hide();
+    }
+    
+    function resetPassword() {
+        launcher.resetPassword();
+    }
+
+    function setProgress(prg) {
+        $('#prg').html(prg + "%");
+        $('#prg').css('width', prg + '%').attr('aria-valuenow', prg);
+    }
+
+    if (launcher.savedCredentials()) {
+        $('#saveCredsCheck').prop('checked', true);
+        $("#inputUsername").val(launcher.getSavedUserName());
+        $("#inputPassword").val(";;USESAVEDPASSWORD;;-32");
+    }
+
+    //Called from the C# Launcher Logic
+    function loginFailed(text) {
+        $("#loadingContainer").hide();
+        $("#loginForm").show();
+        $("#loginForm").animateCSS("bounce");
+        $("#loginErrorMessage").html(text);
+        $("#loginErrorMessage").show();
+    }
+
+    function showMainWindow() {
+        $("#loginWindow").hide();
+        $("#mainWindow").show();
+        $(".windowText").html("HomeState Launcher [" + launcher.getVersion() + "] - Angemeldet als " + launcher.getUser().userName);
+        $('#avatar').css("background-image", "url(" + launcher.getUser().avatar + ")");
+    }
+
+    var $twoFa = false;
+
+
+    //login interaction logic
+    $("#loginForm").submit((sen) => {
+        $twoFa = false;
+        sen.preventDefault();
+        console.log("clicked login btn");
+        $("#loginForm").animateCSS("zoomOut", 400, () => {
+            $("#loginForm").hide();
+            $('#twoFaModal').modal('show');
+            $('#inputTwoFa').focus();
+        });
+    });
+
+    $('#twoFaForm').submit((e) => {
+        e.preventDefault();
+        $('#loadingContainer').show();
+        $twoFa = true;
+        $('#twoFaModal').modal('hide');
+
+        var username = $("#inputUsername").val();
+        var password = $("#inputPassword").val();
+        var twoFa = $("#inputTwoFa").val();
+
+        if (password === ";;USESAVEDPASSWORD;;-32") {
+            launcher.autoLogin(twoFa);
+        } else {
+
+
+            launcher.login(username, password, twoFa, $('#saveCredsCheck').is(':checked'));
+        }
+
+
+    });
+
+    $('#twoFaSubmit').click(() => {
+
+
+    });
+
+
+    $('#twoFaModal').on('hidden.bs.modal', function (e) {
+        if (!$twoFa) {
+            $("#loginForm").animateCSS("zoomIn");
+            $("#loginForm").show();
+        }
+    });
+</script>
+<script>
+    $(".windowText").html("HomeState Launcher [" + launcher.getVersion() + "]");
+    
+    var plugins = JSON.parse(launcher.getLoadedPlugins());
+    var pluginHtml = "";
+
+    plugins.forEach((item) => {
+
+        pluginHtml += item.PluginInfo.DisplayName + " " + item.PluginInfo.Version + "<br>";
+
+    });
+
+    $("#loadedPluginsContainer").html(pluginHtml);
+
+</script>
+</body>
+</html>

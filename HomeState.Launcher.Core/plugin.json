@@ -1,0 +1,15 @@
+{  
+	"Name":"hs-core",
+	"DisplayName": "HomeState Core Logic",
+	"MainAssembly":"HomeState.Launcher.Core.dll",
+	"Version": "1.0",
+	"Assets": [
+		"ui.bundle"
+	],
+	"Dependencies": [
+		{
+			"Name": "hs-ui",
+			"Version": "0.2"
+		}
+	]
+}

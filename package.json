@@ -1,0 +1,25 @@
+{
+  "name": "launcher",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "build": "gulp --gulpfile gulpfile.js build",
+    "release": "gulp --gulpfile gulpfile.js release",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HomeStateDE/Launcher.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "del": "^3.0.0",
+    "gulp": "^4.0.2",
+    "gulp-cli": "^2.2.0",
+    "gulp-dotnet-cli": "^1.1.0",
+    "gulp-msbuild": "^0.5.5",
+    "gulp-zip": "^5.0.0"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "Name": "hs-ui",
+  "DisplayName": "HomeState UI",
+  "Version": "0.2",
+  "MainAssembly": "HomeState.Launcher.UI.dll"
+}
